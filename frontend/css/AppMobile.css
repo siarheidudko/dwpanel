@@ -1,0 +1,27 @@
+#DwpanelBody {
+  margin:0px;
+}
+.DwpanelBodySettingsA {  
+  	-webkit-transform-origin: 0px 0px;
+	-moz-transform-origin: 0px 0px;
+	-ms-transform-origin: 0px 0px;
+	-o-transform-origin: 0px 0px;
+	transform-origin: 0px 0px;
+	-webkit-transform:scale(1.6);
+	-moz-transform:scale(1.6);
+	-ms-transform:scale(1.6);
+	-o-transform:scale(1.6);
+	transform:scale(1.6);
+}
+.DwpanelBodySettingsB {
+  	-webkit-transform-origin: 0px 0px;
+	-moz-transform-origin: 0px 0px;
+	-ms-transform-origin: 0px 0px;
+	-o-transform-origin: 0px 0px;
+	transform-origin: 0px 0px;
+	-webkit-transform:scale(3.0);
+	-moz-transform:scale(3.0);
+	-ms-transform:scale(3.0);
+	-o-transform:scale(3.0);
+	transform:scale(3.0);
+}
