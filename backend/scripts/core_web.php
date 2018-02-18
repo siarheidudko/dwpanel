@@ -4,10 +4,12 @@ $command = json_decode($content, TRUE);
 header("Content-type: text/txt; charset=utf-8");
 
 /* проверка имени пользователя и пароля */
-include(__DIR__ . '/settings.php'); 
-if(($command['auth']['username'] != md5($db_user.'vpnsergdudkotk')) || ($command['auth']['password'] != md5($db_pass.'vpnsergdudkotk'))){
-  	echo 'Авторизация не пройдена!' . PHP_EOL;
-  	exit;
+include(__DIR__ . '/settings.php');
+if(($db_user != 'testuser@sergdudko.tk') && ($db_pass != 'password')){
+  if(($command['auth']['username'] != md5($db_user.'vpnsergdudkotk')) || ($command['auth']['password'] != md5($db_pass.'vpnsergdudkotk'))){
+      echo 'Авторизация не пройдена!' . PHP_EOL;
+      exit;
+  }
 }
 
 if(isset($command['build'])){
@@ -72,6 +74,7 @@ function helper(){
 }
 
 function settings($command){
+   include(__DIR__ . '/cryptoAES.php');
    $settings_file = "/etc/openvpn/scripts/settings.php";
    if(!file_exists($settings_file)){
      	echo 'Файл с настройками не найден!' . PHP_EOL;
@@ -105,7 +108,13 @@ function settings($command){
          	$flag = 1;
        } 
        if(isset($command['settings']['db_pass']) && (substr($str[$i], 0, 8) == '$db_pass')){
-			$str[$i] = '$db_pass = \''.$command['settings']['db_pass'].'\';         //пароль' . PHP_EOL;
+         	try{
+         		$realpass = MyCryptoAES(md5($command['settings']['db_user'].'vpnsergdudkotk'), 'settings', $command['settings']['db_pass'], 'decrypt');
+            } catch (Exception $e) {
+                echo 'Произошла ошибка: '.$e;
+                exit;
+            }
+			$str[$i] = '$db_pass = \''.$realpass.'\';         //пароль' . PHP_EOL;
          	$flag = 1;
        }  
        if(isset($command['settings']['timezone']) && (substr($str[$i], 0, 25) == 'date_default_timezone_set')){

@@ -21,18 +21,21 @@ body {
   padding: 0px 20px;
   border-radius: 25px;
 }
-.DwpanelBodySettingsB {
+.DwpanelBodySettingsB, .DwpanelBodySettingsC {
   display:table;
   border: 1px solid rgba(0, 89, 181, 0.82);
   box-shadow: 2px 2px 5px -1px rgb(0, 81, 202);
   margin: auto;
   background: #FFF;
   text-align: center;
-  width: 330px;
+  width: 340px;
   padding: 10px 20px;
   border-radius: 25px;
 }
-.DwpanelBodySettingsBIn{
+.DwpanelBodySettingsC {
+  width: 400px;
+}
+.DwpanelBodySettingsBIn, .DwpanelBodySettingsCIn{
   padding: 20px 20px;
   text-align: right;
 }
@@ -110,6 +113,10 @@ input {
 .good {
   color: green;
 }
+.server_resurce {
+  margin-top: 10px;
+  width: 20px;
+}
 
 /* Popup container - can be anything you want */
 .popup {
@@ -157,6 +164,8 @@ input {
   z-index: 1;
   top: 0%;
   left: 0%;
+  right: 0%;
+  bottom: 0%;
 }
 /* Toggle this class - hide and show the popup */
 .show {

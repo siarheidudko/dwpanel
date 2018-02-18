@@ -19,8 +19,8 @@ var BlockPopUp = React.createClass({
 	},
   	render: function() {
       return (
-        <div className={(this.state.PopupStatus)?'blockpopup unshow':'blockpopup show'} >
-  			<div className={(this.state.PopupStatus)?'blockpopupimage unshow':'blockpopupimage show'} >
+        <div className={(this.state.PopupStatus)?"blockpopup unshow":"blockpopup show"} >
+  			<div className={(this.state.PopupStatus)?"blockpopupimage unshow":"blockpopupimage show"} >
   				<img src="img/AwaitPostResult.gif" alt="Выполняется запрос..." />
             </div>
         </div>
@@ -50,7 +50,7 @@ var MyPopUp = React.createClass({
 	},
   	render: function() {
       return (
-        <div className={(this.state.PopupText == '')?'popup unshow':'popup show'} onClick={this.onDivClickHandler}>
+        <div className={(this.state.PopupText == "")?"popup unshow":"popup show"} onClick={this.onDivClickHandler}>
   			<span className="popuptext" id="myPopup">{this.state.PopupText}</span>
         </div>
       );
@@ -216,9 +216,11 @@ var Settings = React.createClass({
 			adminmail: [],
 			thisServer: 0,
 			FirebaseAuth: false,
+          	FirebaseRegistration: false,
           	panel: 0,
             EmailAnswer: "",
-            ServerInfo: ""
+            ServerInfo: "",
+          	ResurceRegistr: ""
 		};
 	},
 	componentDidMount: function() {
@@ -284,6 +286,16 @@ var Settings = React.createClass({
           case 'firebase_login':
             AuthUser(ReactDOM.findDOMNode(this.refs.firebase_login).value,ReactDOM.findDOMNode(this.refs.firebase_password).value);
             break;
+          case 'firebase_registration':
+            this.setState({FirebaseRegistration: true});
+            break;
+          case 'firebase_registration_go':
+            window.ee.emit('AwaitPostResult',true);
+            RegistrationServer(ReactDOM.findDOMNode(this.refs.firebase_login).value, ReactDOM.findDOMNode(this.refs.firebase_password).value, ReactDOM.findDOMNode(this.refs.server_address).value, this.state.ResurceRegistr);
+            break;
+          case 'firebase_registration_back':
+            this.setState({FirebaseRegistration: false});
+            break;
           case 'firebase_update':
             this.setState({server: this.state.server.splice(this.state.thisServer, 1)});
           	this.setState({server: this.state.server.pop()});
@@ -347,6 +359,12 @@ var Settings = React.createClass({
                window.ee.emit('SendPostResult', "Заполните email и номер клиента!");
             }
             break;
+          case 'server_resurce_firebase':
+            this.setState({ResurceRegistr : 'firebase'});
+            break;
+          case 'server_resurce_server':
+            this.setState({ResurceRegistr : 'server'});
+            break;
         }
 	},
 	render: function() {
@@ -407,21 +425,35 @@ var Settings = React.createClass({
 		var DwpanelBodySettings;
 		if(this.state.FirebaseAuth){
 			DwpanelBodySettings = 	<div className="DwpanelBodySettingsA">
-              							<MyPopUp />
               							<BlockPopUp />
               							{DwpanelBodySettingsA}
                                     </div>;
-		} else {
-			DwpanelBodySettings = 	<div className="DwpanelBodySettingsB">
-              							<div className="DwpanelBodySettingsBIn">
-											<div key="firebase_login">    Логин:  <input className="firebase_login" ref="firebase_login" defaultValue="testuser@sergdudko.tk" /> </div>
-                                          	<div key="firebase_password"> Пароль: <input type="password" className="firebase_password" ref="firebase_password" defaultValue="password" /> </div>
-											<div key="firebase_login_btn"><button onClick={this.onBtnClickHandler} id='firebase_login'>Войти</button> </div>
-                                        </div>
-									</div>;
-		}
+		} else { 
+          if(this.state.FirebaseRegistration){
+              DwpanelBodySettings = 	<div className="DwpanelBodySettingsC">
+                						  <BlockPopUp />
+                                          <div className="DwpanelBodySettingsCIn">
+                                              <div key="firebase_login">    Email:  <input className="firebase_login" ref="firebase_login" defaultValue="testuser@sergdudko.tk" /> </div>
+                                              <div key="firebase_password"> Пароль: <input type="password" className="firebase_password" ref="firebase_password" defaultValue="password" /> </div>
+                                              <div key="server_address"> Адрес: <input className="server_address" ref="server_address" defaultValue="vpn.sergdudko.tk" /> </div>
+                                              <div key="server_resurce">FIREBASE: <input name="server_resurce" className="server_resurce" type="radio" onClick={this.onBtnClickHandler} id="server_resurce_firebase" /> VPN-сервер: <input name="server_resurce" className="server_resurce" type="radio" onClick={this.onBtnClickHandler} id="server_resurce_server" /></div>
+                                              <div key="firebase_login_btn"><br /><button onClick={this.onBtnClickHandler} id='firebase_registration_go'>Зарегистрироваться</button> <button onClick={this.onBtnClickHandler} id='firebase_registration_back'>Назад</button> </div>
+                                          </div>
+                                      </div>;
+          } else {
+              DwpanelBodySettings = 	<div className="DwpanelBodySettingsB">
+                						  <BlockPopUp />
+                                          <div className="DwpanelBodySettingsBIn">
+                                              <div key="firebase_login">    Логин:  <input className="firebase_login" ref="firebase_login" defaultValue="testuser@sergdudko.tk" /> </div>
+                                              <div key="firebase_password"> Пароль: <input type="password" className="firebase_password" ref="firebase_password" defaultValue="password" /> </div>
+                                              <div key="firebase_login_btn"><br /><button onClick={this.onBtnClickHandler} id='firebase_registration'>Регистрация</button> <button onClick={this.onBtnClickHandler} id='firebase_login'>Войти</button> </div>
+                                          </div>
+                                      </div>;
+          }
+    	}
 		return (
 			<div className="DwpanelBodySettings">
+          		<MyPopUp />
 				{DwpanelBodySettings}
 			</div>
 		);

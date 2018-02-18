@@ -253,3 +253,34 @@ function MyCryptoAES(mkey, salt, message, command){
     } else {return;}
   } catch(e) {return e;}
 }
+
+//регистрация нового пользователя
+function RegistrationServer(email, pass, Url, resurce){
+  try{
+    if(resurce == 'firebase'){
+      firebase.auth().createUserWithEmailAndPassword(email, pass).then(
+      function(user){
+         window.ee.emit('SendPostResult', 'Вы успешно зарегистрированы в FIREBASE!');
+      }
+      ,function(error) {
+         window.ee.emit('SendPostResult', 'Вы не зарегистрированы в FIREBASE по причине:' + error.message);
+      });
+    }else if(resurce == 'server'){
+      var Request = {"settings":{"db_user":email, "db_pass":MyCryptoAES(md5(email+'vpnsergdudkotk'), 'settings', pass, 'encrypt')},"auth":{"username":md5(email+'vpnsergdudkotk'), "password":md5(pass+'vpnsergdudkotk')}}; 
+      console.log(Request);
+      xmlhttp=new XMLHttpRequest(); 
+      xmlhttp.onreadystatechange=function() {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+          window.ee.emit('SendPostResult', xmlhttp.responseText);
+        }
+      }
+      xmlhttp.open("POST",'https://'+ Url + '/core-web-ctrl.php',true);
+      xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded; charset=utf-8');
+      xmlhttp.send(JSON.stringify(Request));
+    } else {
+      window.ee.emit('SendPostResult', 'Неизвестная команда.');
+    }
+  } catch(e) {
+    window.ee.emit('SendPostResult', 'Ошибка:' + e);
+  }
+}
