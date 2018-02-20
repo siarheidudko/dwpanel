@@ -5,8 +5,8 @@
 
 ## Пакетная установка
 
-rpm --import https://vpn.sergdudko.tk/releases/RPM-GPG-KEY
-rpm -ivh https://vpn.sergdudko.tk/releases/dwpanel-2.2.0-1.noarch.rpm
+rpm --import https://vpn.sergdudko.tk/releases/RPM-GPG-KEY  
+rpm -ivh https://vpn.sergdudko.tk/releases/dwpanel-2.2.0-1.noarch.rpm  
 
 ## Ручная установка
 
