@@ -1,3 +1,10 @@
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
+*/
+
 #DwpanelBody {
   margin:0px;
 }
@@ -25,8 +32,8 @@
 	-o-transform:scale(3.0);
 	transform:scale(3.0);
 }
-.popup .popuptext {
-    width: 600px;
-    font-size: 64px;
-  	border-radius: 24px;
+.DwpanelBodySettingsA>.popup .popuptext {
+  	width: 300px;
+  	margin-left: -150px;
+    font-size: 24px;
 }

@@ -1,4 +1,11 @@
 <?php
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
+*/
+
 //php /etc/openvpn/scripts/build_client.php --args -add 1 3 test@email.by
 include(__DIR__ . '/settings.php'); 
 $current = 'php /etc/openvpn/scripts/build_client.php --args '.$argv[2].' '.$argv[3].' '.$argv[4];

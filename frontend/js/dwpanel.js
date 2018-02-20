@@ -1,3 +1,10 @@
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
+*/
+
 var BlockPopUp = React.createClass({
   	getInitialState: function() {
 		return {
@@ -425,23 +432,26 @@ var Settings = React.createClass({
 		var DwpanelBodySettings;
 		if(this.state.FirebaseAuth){
 			DwpanelBodySettings = 	<div className="DwpanelBodySettingsA">
+              							<MyPopUp />
               							<BlockPopUp />
               							{DwpanelBodySettingsA}
                                     </div>;
 		} else { 
           if(this.state.FirebaseRegistration){
               DwpanelBodySettings = 	<div className="DwpanelBodySettingsC">
+                						  <MyPopUp />
                 						  <BlockPopUp />
                                           <div className="DwpanelBodySettingsCIn">
                                               <div key="firebase_login">    Email:  <input className="firebase_login" ref="firebase_login" defaultValue="testuser@sergdudko.tk" /> </div>
                                               <div key="firebase_password"> Пароль: <input type="password" className="firebase_password" ref="firebase_password" defaultValue="password" /> </div>
-                                              <div key="server_address"> Адрес: <input className="server_address" ref="server_address" defaultValue="vpn.sergdudko.tk" /> </div>
+                                              <div key="server_address"> Адрес: <input className="server_address" ref="server_address" defaultValue={window.location.hostname} /> </div>
                                               <div key="server_resurce">FIREBASE: <input name="server_resurce" className="server_resurce" type="radio" onClick={this.onBtnClickHandler} id="server_resurce_firebase" /> VPN-сервер: <input name="server_resurce" className="server_resurce" type="radio" onClick={this.onBtnClickHandler} id="server_resurce_server" /></div>
                                               <div key="firebase_login_btn"><br /><button onClick={this.onBtnClickHandler} id='firebase_registration_go'>Зарегистрироваться</button> <button onClick={this.onBtnClickHandler} id='firebase_registration_back'>Назад</button> </div>
                                           </div>
                                       </div>;
           } else {
               DwpanelBodySettings = 	<div className="DwpanelBodySettingsB">
+                						  <MyPopUp />
                 						  <BlockPopUp />
                                           <div className="DwpanelBodySettingsBIn">
                                               <div key="firebase_login">    Логин:  <input className="firebase_login" ref="firebase_login" defaultValue="testuser@sergdudko.tk" /> </div>
@@ -453,7 +463,6 @@ var Settings = React.createClass({
     	}
 		return (
 			<div className="DwpanelBodySettings">
-          		<MyPopUp />
 				{DwpanelBodySettings}
 			</div>
 		);

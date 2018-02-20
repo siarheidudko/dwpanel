@@ -1,4 +1,11 @@
 <?php
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
+*/
+
 // php /etc/openvpn/scripts/cert_send_toemail.php --args 1 1 admin@sergdudko.tk
 $servername = 'server'.$argv[2];
 $servernum = $argv[2];

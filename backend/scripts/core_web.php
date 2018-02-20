@@ -1,4 +1,11 @@
 <?php
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
+*/
+
 $content = file_get_contents("php://input");
 $command = json_decode($content, TRUE);
 header("Content-type: text/txt; charset=utf-8");

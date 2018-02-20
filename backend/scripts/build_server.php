@@ -1,4 +1,11 @@
 <?php
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
+*/
+
 //php /etc/openvpn/scripts/build_server.php --args -add 1
 //php /etc/openvpn/scripts/build_server.php --args -remove 1
 include(__DIR__ . '/settings.php'); 

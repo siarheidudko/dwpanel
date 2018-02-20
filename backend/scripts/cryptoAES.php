@@ -1,38 +1,9 @@
 <?php 
-/*Функция для шифрования/дешифрования строки по ключу
-MyCryptoAES(md5('admin@sergdudko.tk').md5('999121'), 'email_pass', '!@#$1234', 'encrypt');
-MyCryptoAES(md5('admin@sergdudko.tk').md5('999121'), 'email_pass', 'deqKkb9BQVzRXqjDefPrNA==', 'decrypt');
-
-Аналог в js(требует CryptoJS):
-//шифрование с помощью ключа (cryptoAES.php бэк)
-function MyCryptoAES(mkey, salt, message, command){
-  try{ 
-    var key = CryptoJS.enc.Hex.parse(md5(mkey)); console.log('key: ' + md5(mkey));
-    var iv = CryptoJS.enc.Hex.parse(md5(salt)); console.log('iv: ' + md5(salt));
-    if(command == 'encrypt'){
-      var encrypted = CryptoJS.AES.encrypt(
-        message,key,
-        {
-          iv: iv,
-          mode: CryptoJS.mode.CBC,
-          padding: CryptoJS.pad.Pkcs7
-        }
-      );
-      return (encrypted.toString());
-    } else if(command == 'decrypt'){
-      var decrypted = CryptoJS.AES.decrypt(
-        message,key,
-        {
-          iv: iv,
-          mode: CryptoJS.mode.CBC,
-          padding: CryptoJS.pad.Pkcs7
-        }
-      );
-      return (decrypted.toString(CryptoJS.enc.Utf8));
-    } else {return;}
-  } catch(e) {return e;}
-}
-
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
 */
 
 function MyCryptoAES($mkey, $salt, $message, $command){

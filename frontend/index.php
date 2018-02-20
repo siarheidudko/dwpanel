@@ -1,5 +1,12 @@
-<?php 
-$this_v = '2.1.1'; 
+<?php
+/*
+Dudko Web Panel v2.2.2
+https://github.com/siarheidudko/dwpanel
+(c) 20017-2018 by Siarhei Dudko.
+https://github.com/siarheidudko/dwpanel/LICENSE
+*/
+
+$this_v = '2.2.0'; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +27,7 @@ $this_v = '2.1.1';
   <script src="js/ext/EventEmitter.min.js?v=<?php echo $this_v; ?>"></script>															    <!-- глобальная система событий -->
   <script src="js/ext/firebase.js?v=<?php echo $this_v; ?>"></script> 			    														<!-- firebase  --> 
   <script src="js/firebase-controller.js?v=<?php echo $this_v; ?>"></script> 																<!-- модуль работы с firebase  -->
-  <script src="js/reloaderSSL.js?v=<?php echo $this_v; ?>"></script>																			<!-- переадресация на https  -->
+  <script src="js/reloaderSSL.js?v=<?php echo $this_v; ?>"></script>																		<!-- переадресация на https  -->
   <script src="js/ext/browser.min.js?v=<?php echo $this_v; ?>"></script> 																    <!-- парсер html  -->
   <script type="text/babel" src="js/dwpanel.js?v=<?php echo $this_v; ?>"></script> 															<!-- приложение  -->
 </body>
