@@ -1,17 +1,20 @@
 /*
-Dudko Web Panel v2.2.2
+Dudko Web Panel v2.5.0
 https://github.com/siarheidudko/dwpanel
-(c) 20017-2018 by Siarhei Dudko.
+(c) 2017-2018 by Siarhei Dudko.
 https://github.com/siarheidudko/dwpanel/LICENSE
 */
 
-var BlockPopUp = React.createClass({
-  	getInitialState: function() {
-		return {
-			PopupStatus: true
-		};
-	},
-	componentDidMount: function() {
+class BlockPopUp extends React.Component{
+  
+   constructor(props, context){
+      super(props, context);
+      this.state = {
+        PopupStatus: true,
+      };
+    }
+      
+	componentDidMount() {
 		var self = this;
 		window.ee.addListener('AwaitPostResult', function(item) {
 			self.setState({PopupStatus: item});
@@ -19,12 +22,14 @@ var BlockPopUp = React.createClass({
         window.ee.addListener('SendPostResult', function(item) {
 			self.setState({PopupStatus: true});
 		});
-	},
-	componentWillUnmount: function() {
+	}
+      
+	componentWillUnmount() {
 		window.ee.removeListener('AwaitPostResult');
       	window.ee.removeListener('SendPostResult');
-	},
-  	render: function() {
+	}
+      
+  	render() {
       return (
         <div className={(this.state.PopupStatus)?"blockpopup unshow":"blockpopup show"} >
   			<div className={(this.state.PopupStatus)?"blockpopupimage unshow":"blockpopupimage show"} >
@@ -33,48 +38,60 @@ var BlockPopUp = React.createClass({
         </div>
       );
 	}
-});
+};
 
-var MyPopUp = React.createClass({
-	getInitialState: function() {
-		return {
-			PopupText: ''
-		};
-	},
-	componentDidMount: function() {
+class MyPopUp extends React.Component{
+  
+   constructor(props, context) {
+      super(props, context);
+      this.state = {
+        PopupText: '',
+      };
+      this.onDivClickHandler = this.onDivClickHandler.bind(this);
+    }
+      
+	componentDidMount() {
 		var self = this;
 		window.ee.addListener('SendPostResult', function(item) {
 			self.setState({PopupText: item});
           	setTimeout(function(){self.setState({PopupText: ''});}, 2000);
           	window.ee.emit('ServerLoadInfo',true);
 		});
-	},
-	componentWillUnmount: function() {
+	}
+      
+	componentWillUnmount() {
 		window.ee.removeListener('SendPostResult');
-	},
-  	onDivClickHandler: function(e) {
+	}
+      
+  	onDivClickHandler(e) {
 		this.setState({PopupText: ''});
-	},
-  	render: function() {
+	}
+      
+  	render() {
       return (
         <div className={(this.state.PopupText == "")?"popup unshow":"popup show"} onClick={this.onDivClickHandler}>
   			<span className="popuptext" id="myPopup">{this.state.PopupText}</span>
         </div>
       );
 	}
-});
+};
 
-var Server = React.createClass({
-	getInitialState: function() {
-		return {
-			MailEdit: '',
-			ServerEdit: ''
-		};
-	},
-	propTypes: {
+class Server extends React.Component{
+  
+   constructor(props, context) {
+      super(props, context);
+      this.state = {
+        MailEdit: '',
+		ServerEdit: '',
+      };
+      this.onBtnClickHandler = this.onBtnClickHandler.bind(this);
+      this.onChangeHandler = this.onChangeHandler.bind(this);
+    }
+      
+/*	propTypes: {
 		data: React.PropTypes.number.isRequired
-	},
-	componentDidMount: function() {
+	},*/
+	componentDidMount() {
 		var self = this;
 		window.ee.addListener('mailedit', function(item) {
 			self.setState({MailEdit: item});
@@ -82,12 +99,14 @@ var Server = React.createClass({
 		window.ee.addListener('serveredit', function(item) {
 			self.setState({ServerEdit: item});
 		});
-	},
-	componentWillUnmount: function() {
+	}
+      
+	componentWillUnmount() {
 		window.ee.removeListener('mailedit');
 		window.ee.removeListener('serveredit');
-	},
-	onBtnClickHandler: function() {
+	}
+      
+	onBtnClickHandler() {
 		var EditedServer = {
 			CA_EXPIRE: ReactDOM.findDOMNode(this.refs.CA_EXPIRE).value,
 			KEY_ALTNAMES: ReactDOM.findDOMNode(this.refs.KEY_ALTNAMES).value,
@@ -111,8 +130,9 @@ var Server = React.createClass({
 			var linkDb = user.uid + '/adminmail/';
 			SendData(linkDb, this.state.MailEdit);
 		}
-	},
-	onChangeHandler: function(e) {
+	}
+      
+	onChangeHandler(e) {
 		var EditedServer = {
 			CA_EXPIRE: ReactDOM.findDOMNode(this.refs.CA_EXPIRE).value,
 			KEY_ALTNAMES: ReactDOM.findDOMNode(this.refs.KEY_ALTNAMES).value,
@@ -131,8 +151,9 @@ var Server = React.createClass({
 			hostname: ReactDOM.findDOMNode(this.refs.hostname).value
 		};
 		this.setState({ServerEdit: EditedServer})
-	},
-	render: function() {
+	}
+      
+	render() {
 		if(this.state.ServerEdit !== ''){
 			var DwpanelBodySettingsServerBody = new Array;
 			var RealName = {"CA_EXPIRE":"Срок действия сертификата сервера(пример 3650): ", 
@@ -167,13 +188,17 @@ var Server = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
-var Mail = React.createClass({
-	propTypes: {
+class Mail extends React.Component{
+  
+   constructor(props, context) {
+      super(props, context);
+    }
+/*	propTypes: {
 		data: React.PropTypes.array.isRequired
-	},
-	onChangeHandler: function(e){
+	}, */
+	onChangeHandler(e){
 		var EditedMail = {
 			email_host: ReactDOM.findDOMNode(this.refs.Mail_0).value,
 			email_host_reserve: ReactDOM.findDOMNode(this.refs.Mail_1).value,
@@ -186,8 +211,9 @@ var Mail = React.createClass({
 			email_user_reserve: ReactDOM.findDOMNode(this.refs.Mail_8).value
 		};
 		window.ee.emit('mailedit', EditedMail);
-	},
-	render: function() {
+	}
+      
+	render() {
 		if(typeof(this.props.data) !== 'undefined'){
 			var DwpanelBodySettingsMailBody = new Array;
 			var RealName = {"0":"Основной SMTP-сервер: ", 
@@ -213,24 +239,28 @@ var Mail = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
-var Settings = React.createClass({
-	getInitialState: function() {
-      	PreLogin();
-		return {
-			server: [],
-			adminmail: [],
-			thisServer: 0,
-			FirebaseAuth: false,
-          	FirebaseRegistration: false,
-          	panel: 0,
-            EmailAnswer: "",
-            ServerInfo: "",
-          	ResurceRegistr: ""
-		};
-	},
-	componentDidMount: function() {
+class Settings extends React.Component{
+  
+   constructor(props, context) {
+      super(props, context);
+      PreLogin();
+      this.state = {
+        server: [],
+		adminmail: [],
+		thisServer: 0,
+		FirebaseAuth: false,
+        FirebaseRegistration: false,
+        panel: 0,
+        EmailAnswer: "",
+        ServerInfo: "",
+        ResurceRegistr: "",
+      };
+      this.onBtnClickHandler = this.onBtnClickHandler.bind(this);
+    }
+      
+	componentDidMount() {
 		var self = this;
 		window.ee.addListener('server', function(item) {
 			self.setState({server: item});
@@ -256,16 +286,18 @@ var Settings = React.createClass({
             	SendPostRequest(Url, Request);
             }
 		});
-	},
-	componentWillUnmount: function() {
+	}
+      
+	componentWillUnmount() {
 		window.ee.removeListener('server');
 		window.ee.removeListener('adminmail');
         window.ee.removeListener('FirebaseAuth');
         window.ee.removeListener('InsertEmailAnswer');
         window.ee.removeListener('ServerInfo');
         window.ee.removeListener('ServerLoadInfo');
-	},
-	onBtnClickHandler: function(e) {
+	}
+      
+	onBtnClickHandler(e) {
       	switch (e.target.id){
           case 'back_server':
             this.setState({thisServer: -- this.state.thisServer});
@@ -373,8 +405,9 @@ var Settings = React.createClass({
             this.setState({ResurceRegistr : 'server'});
             break;
         }
-	},
-	render: function() {
+	}
+      
+	render() {
         var DwpanelBodySettingsA =  <div>
           							  <div className={(this.state.panel === 1)?"none":""}>
               							<button onClick={this.onBtnClickHandler} id='server_com' className="ServerState" disabled={(this.state.thisServer >= (this.state.server.length-1))?true:false}>Управление настройками (FIREBASE)</button>
@@ -467,7 +500,7 @@ var Settings = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
 ReactDOM.render(
 	<Settings />,

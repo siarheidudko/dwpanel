@@ -44,11 +44,6 @@ rpm -ivh https://vpn.sergdudko.tk/releases/dwpanel-2.2.0-1.noarch.rpm
 	firewall-cmd --permanent --zone=trusted --add-port=999/tcp
 	firewall-cmd --reload
 ```
-+ Запустить внутренний сервер.
-```
-	systemctl start dwpanel-server
-	systemctl enable dwpanel-server
-```
 + Настроить ваш веб-сервер на папку /var/dwpanel
 
 ## Работа с консолью через команду dwpanel. Обязательные аргументы (порядок не важен) для dwpanel
@@ -231,3 +226,8 @@ id равному или выше, чем удаляемый)
 + Добавлена настройка firewalld
 + Добавлена ТЕСТОВАЯ настройка httpd на 443 порт на папку /var/dwpanel
 + Реализован диалог с пользователем перед установкой (какие системные компоненты трогать, какие нет)
+
+## version 2.5.0
++ Клиентская часть переписана под react 16.2.0
++ Код клиентской части переписан с ES5 на ES6
++ Обновлены внешние библиотеки клиентской части
