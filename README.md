@@ -6,10 +6,10 @@
 ## Пакетная установка
 
 rpm --import https://vpn.sergdudko.tk/releases/RPM-GPG-KEY-SERGDUDKOTK  
-rpm -ivh https://vpn.sergdudko.tk/releases/dwpanel-2.5.0-1.noarch.rpm  
+rpm -ivh https://vpn.sergdudko.tk/releases/dwpanel-2.5.0-2.noarch.rpm  
 
 rpm --import https://raw.githubusercontent.com/siarheidudko/dwpanel/master/releases/RPM-GPG-KEY-SERGDUDKOTK  
-rpm -ivh https://raw.githubusercontent.com/siarheidudko/dwpanel/master/releases/dwpanel-2.5.0-1.noarch.rpm  
+rpm -ivh https://raw.githubusercontent.com/siarheidudko/dwpanel/master/releases/dwpanel-2.5.0-2.noarch.rpm  
 
 ## Ручная установка
 
@@ -72,7 +72,7 @@ rpm -ivh https://raw.githubusercontent.com/siarheidudko/dwpanel/master/releases/
 	client:1(численный номер клиентского сертификата)
 	email:slavianich@gmail.com(клиентское мыло)
 ```
-### Настройка подключения к БД MySQL
+### Настройка подключения к FIREBASE
 ```
 	-settings
 	db_key:token(токен проекта firebase) 

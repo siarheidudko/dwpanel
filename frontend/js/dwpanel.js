@@ -5,6 +5,8 @@ https://github.com/siarheidudko/dwpanel
 https://github.com/siarheidudko/dwpanel/LICENSE
 */
 
+"use strict"
+
 class BlockPopUp extends React.Component{
   
    constructor(props, context){
@@ -194,6 +196,7 @@ class Mail extends React.Component{
   
    constructor(props, context) {
       super(props, context);
+     this.onChangeHandler = this.onChangeHandler.bind(this);
     }
 /*	propTypes: {
 		data: React.PropTypes.array.isRequired
